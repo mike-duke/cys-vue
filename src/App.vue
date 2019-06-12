@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Aside />
+    <Aside @make-todo="addToDo" />
   </div>
 </template>
 
@@ -14,9 +14,13 @@ export default {
   },
   data: () => {
     return {
-      state: {
-        todos: []
-      }
+      todos: []
+    }
+  },
+  methods: {
+    addToDo(todo) {
+      this.todos.push(todo);
+      console.log(this.todos);
     }
   }
 }
