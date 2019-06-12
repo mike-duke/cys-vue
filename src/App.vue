@@ -1,16 +1,19 @@
 <template>
   <div id="app">
     <Aside @make-todo="addToDo" />
+    <ToDoList :todos="todos" />
   </div>
 </template>
 
 <script>
-import Aside from './components/Aside.vue'
+import Aside from './components/Aside.vue';
+import ToDoList from './components/ToDoList';
 
 export default {
   name: 'app',
   components: {
-    Aside
+    Aside,
+    ToDoList
   },
   data: () => {
     return {
@@ -20,7 +23,6 @@ export default {
   methods: {
     addToDo(todo) {
       this.todos.push(todo);
-      console.log(this.todos);
     }
   }
 }

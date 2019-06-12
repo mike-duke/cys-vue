@@ -14,6 +14,7 @@
       <button id="make-button" @click.prevent="makeToDo">Make ToDo</button>
       <button id="clear-button" @click.prevent="clearForm">Clear All</button>
     </form>
+    <hr>
     <button id="filter-button">Filter by Urgency</button>
   </aside>
 </template>
