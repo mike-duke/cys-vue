@@ -10,11 +10,13 @@ import Aside from './components/Aside.vue'
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Aside
   },
-  data: {
-    state: {
-      todos: []
+  data: () => {
+    return {
+      state: {
+        todos: []
+      }
     }
   }
 }
