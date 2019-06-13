@@ -1,19 +1,23 @@
 <template>
   <div id="app">
+    <Header />
     <Aside @make-todo="addToDo" />
     <ToDoList :todos="todos" />
   </div>
 </template>
 
 <script>
-import Aside from './components/Aside.vue';
+import Header from './components/Header';
+import Aside from './components/Aside';
 import ToDoList from './components/ToDoList';
+import './assets/reset.css';
 
 export default {
   name: 'app',
   components: {
+    Header,
     Aside,
-    ToDoList
+    ToDoList,
   },
   data: () => {
     return {
@@ -29,12 +33,5 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
