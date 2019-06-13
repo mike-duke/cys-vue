@@ -38,10 +38,18 @@
 
 <style>
   .todo-card {
-    background: #FFE89D;
-    border: #FFC30C;
     width: 40%;
     height: 400px;
     margin: 20px;
+  }
+
+  .todo-card:nth-child(odd) {
+    background: #FFE89D;
+    border: 2px solid #FFC30C;
+  }
+
+  .todo-card:nth-child(even) {
+    background: #FAFDFF;
+    border: 2px solid #C7D3D8;
   }
 </style>

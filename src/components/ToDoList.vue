@@ -23,5 +23,6 @@
     grid-area: todos;
     display: flex;
     flex-wrap: wrap;
+    background: #F3F6F7;
   }
 </style>
