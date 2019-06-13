@@ -36,4 +36,12 @@
   }
 </script>
 
-<style></style>
+<style>
+  .todo-card {
+    background: #FFE89D;
+    border: #FFC30C;
+    width: 40%;
+    height: 400px;
+    margin: 20px;
+  }
+</style>

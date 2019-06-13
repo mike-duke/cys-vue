@@ -51,6 +51,6 @@
   #aside-component {
     grid-area: aside;
     background: #587A8A;
-    height: 90vh;
+    min-height: 90vh;
   }
 </style>

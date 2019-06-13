@@ -21,5 +21,7 @@
 <style>
   #todo-list {
     grid-area: todos;
+    display: flex;
+    flex-wrap: wrap;
   }
 </style>
