@@ -1,5 +1,5 @@
 <template>
-  <aside>
+  <aside id="aside-component">
     <form>
       <label for="title-input">ToDo Title</label>
       <input type="text" id="title-input" v-model="titleInput">
@@ -48,5 +48,9 @@
 </script>
 
 <style>
-
+  #aside-component {
+    grid-area: aside;
+    background: #587A8A;
+    height: 90vh;
+  }
 </style>

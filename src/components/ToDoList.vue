@@ -18,4 +18,8 @@
   }
 </script>
 
-<style></style>
+<style>
+  #todo-list {
+    grid-area: todos;
+  }
+</style>

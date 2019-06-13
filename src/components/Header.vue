@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header id="header-component">
     <h1>Check <span id="yo">Yo'</span> Self</h1>
     <form>
       <button>Search</button>
@@ -20,14 +20,18 @@
 </script>
 
 <style>
-  header {
+  #header-component {
     grid-area: header;
     background: #1F1F3D;
+    display: flex;
+    justify-content: space-between;
+    height: 10vh;
   }
 
-  h1 {
+  header h1 {
     color: #FFFFFF;
     font-weight: 800;
+    font-size: 2rem;
   }
 
   #yo {

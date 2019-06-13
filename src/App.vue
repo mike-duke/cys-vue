@@ -33,5 +33,19 @@ export default {
 </script>
 
 <style>
+  * {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px; 
+    box-sizing: border-box;
+  }
 
+  #app {
+    display: grid;
+    grid-template-areas: 
+      "header header"
+      "aside todos"
+      "aside todos";
+    
+    grid-template-columns: 30% 1fr;
+  }
 </style>
