@@ -1,28 +1,51 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Header />
+    <Aside @make-todo="addToDo" />
+    <ToDoList :todos="todos" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from './components/Header';
+import Aside from './components/Aside';
+import ToDoList from './components/ToDoList';
+import './assets/reset.css';
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Header,
+    Aside,
+    ToDoList,
+  },
+  data: () => {
+    return {
+      todos: []
+    }
+  },
+  methods: {
+    addToDo(todo) {
+      this.todos.push(todo);
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  * {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px; 
+    box-sizing: border-box;
+  }
+
+  #app {
+    display: grid;
+    grid-template-areas: 
+      "header header"
+      "aside todos"
+      "aside todos";
+    
+    grid-template-columns: 30% 1fr;
+  }
 </style>
