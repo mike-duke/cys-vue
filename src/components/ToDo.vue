@@ -46,30 +46,29 @@
       completeTask(e)  {
         const taskId = parseInt(e.target.closest('.task-list-item').dataset.id);
         const todos = this.getToDosFromStorage();
-        
-        const todoToUpdate = todos.find((todo) => todo.id === todoId);
+        const todoToUpdate = todos.todos.find((todo) => todo.id === todos.todoId);
         const taskToUpdate = todoToUpdate.taskList.find((task) => task.id === taskId);
         taskToUpdate.completed = !taskToUpdate.completed;
         this.taskList = todoToUpdate.taskList;
-        this.setToDosInStorage(todos);
+        this.setToDosInStorage(todos.todos);
       },
       updateUrgent() {
         const todos = this.getToDosFromStorage();
-        const todoToUpdate = todos.find(todo => todo.id === todoId);
+        const todoToUpdate = todos.todos.find(todo => todo.id === todos.todoId);
         todoToUpdate.urgent = !todoToUpdate.urgent;
         this.urgent = todoToUpdate.urgent;
-        this.setToDosInStorage(todos);
+        this.setToDosInStorage(todos.todos);
       },
       deleteToDo(e) {
         const todos = this.getToDosFromStorage();
-        const newTodos = todos.filter(todo => todo.id !== todoId);
+        const newTodos = todos.todos.filter(todo => todo.id !== todos.todoId);
         this.setToDosInStorage(newToDos);
         e.target.closest('.todo-card').remove();
       },
       getToDosFromStorage() {
         const todoId = this.$vnode.data.key;
         const todos = JSON.parse(localStorage.getItem('cysToDos'));
-        return todos;
+        return {todoId, todos};
       },
       setToDosInStorage(todos) {
         localStorage.setItem('cysToDos', JSON.stringify(todos));
