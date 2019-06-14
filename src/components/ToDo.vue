@@ -17,7 +17,7 @@
         URGENT
       </button>
 
-      <button id="delete-button">
+      <button id="delete-button" @click="deleteToDo">
         <img src="../assets/delete.svg" alt="">
         DELETE
       </button>
@@ -44,21 +44,34 @@
     },
     methods: {
       completeTask(e)  {
-        const todoId = this.$vnode.data.key;
         const taskId = parseInt(e.target.closest('.task-list-item').dataset.id);
-        const todos = JSON.parse(localStorage.getItem('cysToDos'));
+        const todos = this.getToDosFromStorage();
+        
         const todoToUpdate = todos.find((todo) => todo.id === todoId);
         const taskToUpdate = todoToUpdate.taskList.find((task) => task.id === taskId);
         taskToUpdate.completed = !taskToUpdate.completed;
         this.taskList = todoToUpdate.taskList;
-        localStorage.setItem('cysToDos', JSON.stringify(todos));
+        this.setToDosInStorage(todos);
       },
       updateUrgent() {
-        const todoId = this.$vnode.data.key;
-        const todos = JSON.parse(localStorage.getItem('cysToDos'));
+        const todos = this.getToDosFromStorage();
         const todoToUpdate = todos.find(todo => todo.id === todoId);
         todoToUpdate.urgent = !todoToUpdate.urgent;
         this.urgent = todoToUpdate.urgent;
+        this.setToDosInStorage(todos);
+      },
+      deleteToDo(e) {
+        const todos = this.getToDosFromStorage();
+        const newTodos = todos.filter(todo => todo.id !== todoId);
+        this.setToDosInStorage(newToDos);
+        e.target.closest('.todo-card').remove();
+      },
+      getToDosFromStorage() {
+        const todoId = this.$vnode.data.key;
+        const todos = JSON.parse(localStorage.getItem('cysToDos'));
+        return todos;
+      },
+      setToDosInStorage(todos) {
         localStorage.setItem('cysToDos', JSON.stringify(todos));
       }
     }
