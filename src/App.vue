@@ -34,11 +34,9 @@
       addToDo(todo) {
         this.todos.unshift(todo);
         let storage = JSON.parse(localStorage.getItem('cysToDos'));
-        console.log(this.todos)
         if (storage) {
           localStorage.setItem('cysToDos', JSON.stringify([...this.todos]));
         } else {
-          console.log(this.todos)
           localStorage.setItem('cysToDos', JSON.stringify(this.todos));
         }
       }
