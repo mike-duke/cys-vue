@@ -11,8 +11,16 @@
     </ul>
     <hr>
     <div id="urgent-and-delete-buttons">
-      <button>Urgent</button>
-      <button>Delete</button>
+      <button id="urgent-button" @click="updateUrgent">
+        <img v-if="urgent" src="../assets/urgent-active.svg" alt="">
+        <img v-else src="../assets/urgent.svg" alt="">
+        URGENT
+      </button>
+
+      <button id="delete-button">
+        <img src="../assets/delete.svg" alt="">
+        DELETE
+      </button>
     </div>
   </article>
 </template>
@@ -30,7 +38,8 @@
       return {
         title: this.todo.title,
         taskList: this.todo.taskList,
-        id: this.todo.id
+        id: this.todo.id,
+        urgent: this.todo.urgent
       }
     },
     methods: {
@@ -42,6 +51,14 @@
         const taskToUpdate = todoToUpdate.taskList.find((task) => task.id === taskId);
         taskToUpdate.completed = !taskToUpdate.completed;
         this.taskList = todoToUpdate.taskList;
+        localStorage.setItem('cysToDos', JSON.stringify(todos));
+      },
+      updateUrgent() {
+        const todoId = this.$vnode.data.key;
+        const todos = JSON.parse(localStorage.getItem('cysToDos'));
+        const todoToUpdate = todos.find(todo => todo.id === todoId);
+        todoToUpdate.urgent = !todoToUpdate.urgent;
+        this.urgent = todoToUpdate.urgent;
         localStorage.setItem('cysToDos', JSON.stringify(todos));
       }
     }
@@ -73,5 +90,17 @@
   .completedTask {
     font-style: italic;
     color: gray;
+  }
+
+  #urgent-and-delete-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+
+  .todo-card button {
+    all: unset;
+    height: 50px;
+    width: 50px;
   }
 </style>

@@ -42,7 +42,8 @@
         this.$emit('make-todo', {
           title: this.titleInput, 
           taskList: this.taskList, 
-          id: Date.now()
+          id: Date.now(),
+          urgent: false
         });
         this.clearForm();
       },
