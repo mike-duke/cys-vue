@@ -31,14 +31,17 @@
     },
     methods: {
       addTask() {
-        this.taskList.push({title: this.taskInput, id: Date.now()});
+        this.taskList.push({
+          title: this.taskInput, 
+          completed: false,
+          id: Date.now()
+          });
         this.taskInput = '';
       },
       makeToDo() {
         this.$emit('make-todo', {
           title: this.titleInput, 
           taskList: this.taskList, 
-          completed: false,
           id: Date.now()
         });
         this.clearForm();

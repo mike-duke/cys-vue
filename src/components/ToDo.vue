@@ -2,10 +2,13 @@
   <article class="todo-card">
     <h3>{{ title }}</h3>
     <hr>
-    <div v-for="task in taskList" :key="task.id">
-      <input type="checkbox" id="task.id" name="task.title" value="task.title">
-      <label for="task.id">{{ task.title }}</label>
-    </div>
+    <ul>
+      <li v-for="task in taskList" :key="task.id" :data-id="task.id" @click="completeTask" class="task-list-item">
+        <img v-if="!task.completed" src="../assets/checkbox.svg" class="checkbox" alt="">
+        <img v-else src="../assets/checkbox-active.svg" class="checkbox" alt="">
+        <span class="task-title" :class="{ completedTask: task.completed }">{{ task.title }}</span>
+      </li>
+    </ul>
     <hr>
     <div id="urgent-and-delete-buttons">
       <button>Urgent</button>
@@ -31,7 +34,11 @@
       }
     },
     methods: {
-
+      completeTask(e) {
+        const taskKey = parseInt(e.target.closest('.task-list-item').dataset.id);
+        const taskToUpdate = this.taskList.find((task) => task.id === taskKey);
+        taskToUpdate.completed = !taskToUpdate.completed;
+      }
     }
   }
 </script>
@@ -51,5 +58,15 @@
   .todo-card:nth-child(even) {
     background: #FAFDFF;
     border: 2px solid #C7D3D8;
+  }
+
+  .checkbox {
+    height: 50px;
+    width: 50px;
+  }
+
+  .completedTask {
+    font-style: italic;
+    color: gray;
   }
 </style>
