@@ -7,29 +7,43 @@
 </template>
 
 <script>
-import Header from './components/Header';
-import Aside from './components/Aside';
-import ToDoList from './components/ToDoList';
-import './assets/reset.css';
+  import Header from './components/Header';
+  import Aside from './components/Aside';
+  import ToDoList from './components/ToDoList';
+  import './assets/reset.css';
 
-export default {
-  name: 'app',
-  components: {
-    Header,
-    Aside,
-    ToDoList,
-  },
-  data: () => {
-    return {
-      todos: []
-    }
-  },
-  methods: {
-    addToDo(todo) {
-      this.todos.push(todo);
+  export default {
+    name: 'app',
+    components: {
+      Header,
+      Aside,
+      ToDoList,
+    },
+    data() {
+      return {
+        todos: []
+      }
+    },
+    created() {
+      let storage = JSON.parse(localStorage.getItem('cysToDos'));
+      if (storage) {
+        this.todos = storage;
+      }
+    },
+    methods: {
+      addToDo(todo) {
+        this.todos.unshift(todo);
+        let storage = JSON.parse(localStorage.getItem('cysToDos'));
+        console.log(this.todos)
+        if (storage) {
+          localStorage.setItem('cysToDos', JSON.stringify([...this.todos]));
+        } else {
+          console.log(this.todos)
+          localStorage.setItem('cysToDos', JSON.stringify(this.todos));
+        }
+      }
     }
   }
-}
 </script>
 
 <style>

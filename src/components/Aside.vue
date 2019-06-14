@@ -35,7 +35,12 @@
         this.taskInput = '';
       },
       makeToDo() {
-        this.$emit('make-todo', {title: this.titleInput, taskList: this.taskList, id: Date.now()});
+        this.$emit('make-todo', {
+          title: this.titleInput, 
+          taskList: this.taskList, 
+          completed: false,
+          id: Date.now()
+        });
         this.clearForm();
       },
       clearForm() {
