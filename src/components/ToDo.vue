@@ -34,10 +34,15 @@
       }
     },
     methods: {
-      completeTask(e) {
-        const taskKey = parseInt(e.target.closest('.task-list-item').dataset.id);
-        const taskToUpdate = this.taskList.find((task) => task.id === taskKey);
+      completeTask(e)  {
+        const todoId = this.$vnode.data.key;
+        const taskId = parseInt(e.target.closest('.task-list-item').dataset.id);
+        const todos = JSON.parse(localStorage.getItem('cysToDos'));
+        const todoToUpdate = todos.find((todo) => todo.id === todoId);
+        const taskToUpdate = todoToUpdate.taskList.find((task) => task.id === taskId);
         taskToUpdate.completed = !taskToUpdate.completed;
+        this.taskList = todoToUpdate.taskList;
+        localStorage.setItem('cysToDos', JSON.stringify(todos));
       }
     }
   }
