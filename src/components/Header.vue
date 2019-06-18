@@ -2,10 +2,17 @@
   <header id="header-component">
     <h1>Check <span id="yo">Yo'</span> Self</h1>
     <form>
-      <button id="search-button">
+      <button id="search-button" @click.prevent="searchToDos">
         <img src="../assets/search.svg" alt="Search">
       </button>
-      <input type="text" placeholder="Search ToDos" v-model="searchInput" id="search-input" @keyup="searchToDos">
+      <input 
+        type="text" 
+        placeholder="Search ToDos" 
+        v-model="searchInput" 
+        id="search-input" 
+        @keyup="searchToDos"
+        ref="searchInput">
+      <button @click.prevent="clearSearch">X</button>
     </form>
   </header>
 </template>
@@ -21,6 +28,13 @@
     methods: {
       searchToDos(e) {
         this.searchInput = e.target.value;
+        this.$emit('search-todos', {
+          searchInput: this.searchInput
+        });
+      },
+      clearSearch() {
+        this.searchInput = '';
+        this.$refs.searchInput.focus();
         this.$emit('search-todos', {
           searchInput: this.searchInput
         });
