@@ -2,20 +2,20 @@
   <aside id="aside-component">
     <form>
       <label for="title-input">ToDo Title</label>
-      <input type="text" id="title-input" v-model="titleInput">
+      <input type="text" id="title-input" v-model="titleInput" ref="titleInput">
       <ul id="task-list">
         <li v-for="task in taskList" :key="task.id">
           {{ task.title }}
         </li>
       </ul>
       <label for="item-input">ToDo Task Item</label>
-      <input type="text" id="item-input" v-model="taskInput">
+      <input type="text" id="item-input" v-model="taskInput" ref="itemInput">
       <button id="add-task-button" @click.prevent="addTask">+</button>
       <button id="make-button" @click.prevent="makeToDo">Make ToDo</button>
       <button id="clear-button" @click.prevent="clearForm">Clear All</button>
     </form>
     <hr>
-    <button id="filter-button">Filter by Urgency</button>
+    <button id="filter-button" @click="filterToDos">Filter by Urgency</button>
   </aside>
 </template>
 
@@ -29,6 +29,9 @@
         taskList: []
       }
     },
+    mounted() {
+      this.$refs.titleInput.focus();
+    },
     methods: {
       addTask() {
         this.taskList.push({
@@ -37,6 +40,7 @@
           id: Date.now()
           });
         this.taskInput = '';
+        this.$refs.itemInput.focus();
       },
       makeToDo() {
         this.$emit('make-todo', {
@@ -51,6 +55,11 @@
         this.titleInput = '';
         this.taskInput = '';
         this.taskList = [];
+      },
+      filterToDos(e) {
+        this.$emit('filter-todos', {
+          classList: e.target.classList
+        });
       }
     }
   }

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Header />
-    <Aside @make-todo="addToDo" />
+    <Header @search-todos="search" />
+    <Aside @make-todo="addToDo" @filter-todos="filterByUrgent" />
     <ToDoList :todos="todos" />
   </div>
 </template>
@@ -39,6 +39,29 @@
         } else {
           localStorage.setItem('cysToDos', JSON.stringify(this.todos));
         }
+      },
+      filterByUrgent(el) {
+        let { classList } = el;
+        if (classList.contains('clicked')) {
+          classList.remove('clicked');
+          this.todos = JSON.parse(localStorage.getItem('cysToDos'));
+        } else {
+          classList.add('clicked')
+          this.todos = this.todos.filter(todo => {
+            return todo.urgent === true
+          });
+        }
+      },
+      search(e) {
+        if (!e.searchInput) {
+          this.todos = JSON.parse(localStorage.getItem('cysToDos'));
+        }
+        this.todos = this.todos.filter(todo => {
+          const taskArray = todo.taskList.filter(task => {
+            return task.title.includes(e.searchInput);
+          });
+          return todo.title.includes(e.searchInput) || taskArray.length !== 0;
+        });
       }
     }
   }
