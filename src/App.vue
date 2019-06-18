@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header />
-    <Aside @make-todo="addToDo" />
+    <Aside @make-todo="addToDo" @filter-todos="filterByUrgent" />
     <ToDoList :todos="todos" />
   </div>
 </template>
@@ -39,6 +39,19 @@
         } else {
           localStorage.setItem('cysToDos', JSON.stringify(this.todos));
         }
+      },
+      filterByUrgent(e) {
+        let { classList } = e.event.target
+        if (classList.contains('clicked')) {
+          classList.remove('clicked');
+          this.todos = JSON.parse(localStorage.getItem('cysToDos'));
+        } else {
+          classList.add('clicked')
+          this.todos = this.todos.filter(todo => {
+            return todo.urgent === true
+          });
+        }
+        
       }
     }
   }

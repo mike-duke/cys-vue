@@ -15,7 +15,7 @@
       <button id="clear-button" @click.prevent="clearForm">Clear All</button>
     </form>
     <hr>
-    <button id="filter-button">Filter by Urgency</button>
+    <button id="filter-button" @click="filterToDos">Filter by Urgency</button>
   </aside>
 </template>
 
@@ -51,6 +51,11 @@
         this.titleInput = '';
         this.taskInput = '';
         this.taskList = [];
+      },
+      filterToDos() {
+        this.$emit('filter-todos', {
+          event: event
+        });
       }
     }
   }

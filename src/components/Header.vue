@@ -2,8 +2,10 @@
   <header id="header-component">
     <h1>Check <span id="yo">Yo'</span> Self</h1>
     <form>
-      <button>Search</button>
-      <input type="text" placeholder="search" v-model="searchInput" id="search-input">
+      <button id="search-button">
+        <img src="../assets/search.svg" alt="Search">
+      </button>
+      <input type="text" placeholder="Search ToDos" v-model="searchInput" id="search-input" @keyup="seachToDos">
     </form>
   </header>
 </template>
@@ -14,6 +16,11 @@
     data() {
       return {
         searchInput: ''
+      }
+    },
+    methods: {
+      searchToDos(e) {
+        
       }
     }
   }
@@ -36,5 +43,10 @@
 
   #yo {
     color: #FFC30C;
+  }
+
+  #search-button img {
+    height: 20px;
+    width: 20px;
   }
 </style>
