@@ -52,9 +52,9 @@
         this.taskInput = '';
         this.taskList = [];
       },
-      filterToDos() {
+      filterToDos(e) {
         this.$emit('filter-todos', {
-          event: event
+          classList: e.target.classList
         });
       }
     }

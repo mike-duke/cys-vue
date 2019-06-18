@@ -5,7 +5,7 @@
       <button id="search-button">
         <img src="../assets/search.svg" alt="Search">
       </button>
-      <input type="text" placeholder="Search ToDos" v-model="searchInput" id="search-input" @keyup="seachToDos">
+      <input type="text" placeholder="Search ToDos" v-model="searchInput" id="search-input" @keyup="searchToDos">
     </form>
   </header>
 </template>
@@ -20,7 +20,10 @@
     },
     methods: {
       searchToDos(e) {
-        
+        this.searchInput = e.target.value;
+        this.$emit('search-todos', {
+          searchInput: this.searchInput
+        });
       }
     }
   }
