@@ -57,7 +57,7 @@
           this.todos = JSON.parse(localStorage.getItem('cysToDos'));
         }
         this.todos = this.todos.filter(todo => {
-          const taskArray = todo.taskList.filter(task => {
+          const taskArray = todo.tasks.filter(task => {
             return task.title.includes(e.searchInput);
           });
           return todo.title.includes(e.searchInput) || taskArray.length !== 0;

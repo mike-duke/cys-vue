@@ -4,7 +4,7 @@
       <label for="title-input">ToDo Title</label>
       <input type="text" id="title-input" v-model="titleInput" ref="titleInput">
       <ul id="task-list">
-        <li v-for="task in taskList" :key="task.id">
+        <li v-for="task in tasks" :key="task.id">
           {{ task.title }}
         </li>
       </ul>
@@ -26,7 +26,7 @@
       return {
         titleInput: '',
         taskInput: '',
-        taskList: []
+        tasks: []
       }
     },
     mounted() {
@@ -34,7 +34,7 @@
     },
     methods: {
       addTask() {
-        this.taskList.push({
+        this.tasks.push({
           title: this.taskInput, 
           completed: false,
           id: Date.now()
@@ -45,7 +45,7 @@
       makeToDo() {
         this.$emit('make-todo', {
           title: this.titleInput, 
-          taskList: this.taskList, 
+          tasks: this.tasks, 
           id: Date.now(),
           urgent: false
         });
@@ -54,7 +54,7 @@
       clearForm() {
         this.titleInput = '';
         this.taskInput = '';
-        this.taskList = [];
+        this.tasks = [];
       },
       filterToDos(e) {
         this.$emit('filter-todos', {

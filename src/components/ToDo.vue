@@ -3,7 +3,7 @@
     <h3>{{ title }}</h3>
     <hr>
     <ul>
-      <li v-for="task in taskList" :key="task.id" :data-id="task.id" @click="completeTask" class="task-list-item">
+      <li v-for="task in tasks" :key="task.id" :data-id="task.id" @click="completeTask" class="task-list-item">
         <img v-if="!task.completed" src="../assets/checkbox.svg" class="checkbox" alt="">
         <img v-else src="../assets/checkbox-active.svg" class="checkbox" alt="">
         <span class="task-title" :class="{ completedTask: task.completed }">{{ task.title }}</span>
@@ -37,7 +37,7 @@
     data() {
       return {
         title: this.todo.title,
-        taskList: this.todo.taskList,
+        tasks: this.todo.tasks,
         id: this.todo.id,
         urgent: this.todo.urgent
       }
@@ -47,9 +47,9 @@
         const taskId = parseInt(e.target.closest('.task-list-item').dataset.id);
         const todos = this.getToDosFromStorage();
         const todoToUpdate = todos.todos.find((todo) => todo.id === todos.todoId);
-        const taskToUpdate = todoToUpdate.taskList.find((task) => task.id === taskId);
+        const taskToUpdate = todoToUpdate.tasks.find((task) => task.id === taskId);
         taskToUpdate.completed = !taskToUpdate.completed;
-        this.taskList = todoToUpdate.taskList;
+        this.tasks = todoToUpdate.tasks;
         this.setToDosInStorage(todos.todos);
       },
       updateUrgent() {
